@@ -1,6 +1,6 @@
 <Body:>
   <ul>
     {#each _list as :p}
-      <li><a href={:p.url}>{:p.title}</a></li>
+      <li><a href={:p.url}>{:p.title}</a> - [<a href="/post/{:p.id}">post</a>]</li>
     {/each}
   </ul>

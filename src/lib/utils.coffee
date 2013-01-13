@@ -31,6 +31,17 @@ removeDuplicates = (arr) ->
     arr.push hold[key]
   arr
 
+encodeMongoId = (id) ->
+  new Buffer(id, 'hex')
+    .toString('base64')
+    .replace('+','-')
+    .replace('/','_')
+
+decodeMongoId = (id) ->
+  new Buffer(id.replace('-','+')
+    .replace('_','/'), 'base64')
+    .toString('hex')
+
 module.exports =
   {
     onServer
@@ -38,4 +49,6 @@ module.exports =
     toParam
     addZero
     removeDuplicates
+    encodeMongoId
+    decodeMongoId
   }

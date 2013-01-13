@@ -3,7 +3,7 @@ pages = [
   {name: 'submit', text: 'Submit', url: '/submit'}
 ]
 
-module.exports = (page, name, ctx = {}) ->
+render = (page, name, ctx = {}) ->
   ctx.currentPage = name
   ctx.pages = []
   for item, i in pages
@@ -14,3 +14,7 @@ module.exports = (page, name, ctx = {}) ->
       ctx.title = item.text
   item.isLast = true
   page.render name, ctx
+
+module.exports = {
+    render
+  }
