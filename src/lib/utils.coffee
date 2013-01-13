@@ -32,7 +32,7 @@ removeDuplicates = (arr) ->
   arr
 
 encodeMongoId = (id) ->
-  new Buffer(id, 'hex')
+  id.toString(16)
     .toString('base64')
     .replace('+','-')
     .replace('/','_')

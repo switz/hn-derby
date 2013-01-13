@@ -21,14 +21,12 @@ controller.submit = (page, model, {body, query}) ->
 
     model.subscribe 'news.posts', (err, posts) ->
       if err then console.log err
-      console.log "Adding #{title}"
-      id = posts.add {title, url}
 
+      id = posts.add {title, url}
       # Push id to array of news.posts.ids for refList
       posts.push 'ids', id
-
       # Redirect to post page
-      view.app.history.push "/post/#{id}"
+      view.app.history.push "/post/#{encodeMongoId id}"
 
       render page, 'submit'
   else
@@ -36,11 +34,11 @@ controller.submit = (page, model, {body, query}) ->
 
 # /post/:id
 controller.post = (page, model, {id}) ->
+  id = decodeMongoId id
   model.subscribe "news.posts.#{id}", (err, post) ->
     model.ref '_post', post
 
     render page, 'post'
-
 
 module.exports = controller
 

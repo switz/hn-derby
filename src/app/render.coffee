@@ -16,5 +16,5 @@ render = (page, name, ctx = {}) ->
   page.render name, ctx
 
 module.exports = {
-    render
-  }
+  render
+}
