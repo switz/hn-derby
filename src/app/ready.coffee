@@ -7,9 +7,16 @@ config = require './config'
 #############
 
 ready (model) ->
+  user = model.at '_user'
+
   @upvote = (e, el, next) ->
-    model.at(el).incr 'score'
+    post = model.at(el)
+    id = user.get('id')
+
+    post.incr 'score'
+    user.at('upvotes').add post.get('id')
     $(el).css('opacity', 0)
+
   # Exported functions are exposed as a global in the browser with the same
   # name as the module that includes Derby. They can also be bound to DOM
   # events using the "x-bind" attribute in a template.

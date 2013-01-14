@@ -2,7 +2,8 @@
   <ol>
     {#each _list as :p}
       <li>
-        <div class=upvote x-bind=click:upvote>^</div>
+        <div class="upvote" x-bind=click:upvote>^</div>
+        <sup>[{:p.score}]</sup>
         <a href={:p.url}>{:p.title}</a> - [<a href="/post/{:p.id}">post</a>]
       </li>
     {/each}

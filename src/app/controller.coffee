@@ -21,7 +21,9 @@ controller.submit = (page, model, {body, query}) ->
     model.subscribe 'news.posts', (err, posts) ->
       if err then console.log err
 
-      id = posts.add {title, url}
+      score = 0
+
+      id = posts.add {title, url, score}
       # Push id to array of news.posts.ids for refList
       posts.push 'ids', id
       # Redirect to post page
