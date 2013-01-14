@@ -12,8 +12,9 @@ store.readPathAccess 'news.*', () -> #captures, next) ->
 
 ## Query Motifs
 
-store.query.expose 'collection', 'getYear', (year) ->
-  @where('year').equals year
+store.query.expose 'users', 'upvoted', (userId, postId) ->
+  @where('id').equals(userId)
+    .where('upvotes').equals(postId)
 
 ## Give query access
 
@@ -23,7 +24,7 @@ giveQueryAccess = (col, fn) ->
     accept true # for now
 
 obj =
-  collection: ['getYear']
+  users: ['upvoted']
 
 for col of obj
   obj[col].map (fn) -> giveQueryAccess col, fn
