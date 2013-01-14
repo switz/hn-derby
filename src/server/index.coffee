@@ -66,6 +66,9 @@ mongoStore = new MongoStore { url: process.env.HN_URI }, ->
 
     # Adds req.getModel method
     .use(store.modelMiddleware())
+    # Adds auth
+    .use(auth(store, strategies, options))
+    # Set _user model
     .use((req, res, next) ->
       model = req.getModel()
 
@@ -75,8 +78,6 @@ mongoStore = new MongoStore { url: process.env.HN_URI }, ->
         model.ref '_user', user
         next()
     )
-    # Adds auth
-    .use(auth(store, strategies, options))
     # Creates an express middleware from the app's routes
     .use(app.router())
     .use(expressApp.router)

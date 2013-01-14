@@ -1,6 +1,7 @@
 derby = require 'derby'
 { view } = require './index'
 { render } = require './render'
+{ validateUrl } = require '../lib/utils'
 
 controller = {}
 
@@ -17,6 +18,10 @@ controller.submit = (page, model, {body, query}) ->
   if body and body.story
     title = body.story.title
     url = body.story.url
+
+    if validateUrl url
+      model.set '_error', true
+      return page.render 'submit'
 
     model.subscribe 'news.posts', (err, posts) ->
       if err then console.log err

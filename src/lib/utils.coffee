@@ -31,6 +31,11 @@ removeDuplicates = (arr) ->
     arr.push hold[key]
   arr
 
+urlRegex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/i
+
+validateUrl = (url) ->
+  urlRegex.test url
+
 module.exports =
   {
     onServer
@@ -38,4 +43,5 @@ module.exports =
     toParam
     addZero
     removeDuplicates
+    validateUrl
   }

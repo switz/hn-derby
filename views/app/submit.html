@@ -2,10 +2,8 @@
   <form action=submit method=post>
     <input type=hidden name=_method value=put>
     <p><label>Title: <input type=text name=story[title]></label></p>
-    <p><label>Url: <input type=text name=story[url]></label></p>
+    <p><label>Url: <input type=text name=story[url] value={_newUrl}></label> {#if validateUrl(_newUrl)}✓{else}✘{/if}</p>
     <p>or</p>
     <p><label>Text <textarea name=story[text]></textarea></p>
     <p><input type=submit></p>
   </form>
-  <h3>Arguments:</h3>
-  <pre><code>{{args}}</code></pre>
