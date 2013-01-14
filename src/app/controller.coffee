@@ -19,9 +19,10 @@ controller.submit = (page, model, {body, query}) ->
     title = body.story.title
     url = body.story.url
 
-    if validateUrl url
-      model.set '_error', true
-      return page.render 'submit'
+    unless title and validateUrl url
+      model.set '_newPost',
+        error: true
+      return render page, 'submit'
 
     model.subscribe 'news.posts', (err, posts) ->
       if err then console.log err
@@ -33,6 +34,8 @@ controller.submit = (page, model, {body, query}) ->
       posts.push 'ids', id
       # Redirect to post page
       view.app.history.push "/post/#{id}"
+
+      model.del m for m in ['_newTitle', '_newUrl', '_newPost']
 
       render page, 'submit'
   else
