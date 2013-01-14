@@ -2,14 +2,13 @@ derby = require 'derby'
 { view } = require './index'
 { render } = require './render'
 
-{ encodeMongoId, decodeMongoId } = require '../lib/utils'
-
 controller = {}
 
 # /
 controller.home = (page, model) ->
   model.subscribe 'news.posts', (err, posts) ->
     console.log err if err
+
     model.refList '_list', 'news.posts', 'news.posts.ids'
     render page, 'home'
 
@@ -26,7 +25,7 @@ controller.submit = (page, model, {body, query}) ->
       # Push id to array of news.posts.ids for refList
       posts.push 'ids', id
       # Redirect to post page
-      view.app.history.push "/post/#{encodeMongoId id}"
+      view.app.history.push "/post/#{id}"
 
       render page, 'submit'
   else
@@ -34,7 +33,6 @@ controller.submit = (page, model, {body, query}) ->
 
 # /post/:id
 controller.post = (page, model, {id}) ->
-  id = decodeMongoId id
   model.subscribe "news.posts.#{id}", (err, post) ->
     model.ref '_post', post
 

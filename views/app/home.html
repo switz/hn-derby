@@ -1,6 +1,9 @@
 <Body:>
-  <ul>
+  <ol>
     {#each _list as :p}
-      <li><a href={:p.url}>{:p.title}</a> - [<a href="/post/{encodeMongoId(:p.id)}">post</a>]</li>
+      <li>
+        <div class=upvote x-bind=click:upvote>^</div>
+        <a href={:p.url}>{:p.title}</a> - [<a href="/post/{:p.id}">post</a>]
+      </li>
     {/each}
-  </ul>
+  </ol>
