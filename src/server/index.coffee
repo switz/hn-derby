@@ -72,7 +72,7 @@ mongoStore = new MongoStore { url: process.env.HN_URI }, ->
       model.fetch "users.#{model.session.userId}", (err, user) ->
         if err then console.log err
 
-        model.set '_user', user.get()
+        model.ref '_user', user
         next()
     )
     # Adds auth
