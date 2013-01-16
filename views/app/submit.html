@@ -3,8 +3,26 @@
   <form action=submit method=post>
     <input type=hidden name=_method value=put>
     <p><label>Title: <input type=text name=story[title] value={_newTitle}></label> {#if _newTitle}✓{else}✘{/if}</p>
-    <p><label>Url: <input type=text name=story[url] value={_newUrl}></label> {#if validateUrl(_newUrl)}✓{else}✘{/if}</p>
+    <p>
+      <label>Url: <input type=text name=story[url] value={_newUrl} placeholder=http://></label>
+      {#if validateUrl(_newUrl)}
+        ✓
+      {else if _newText}
+        d
+      {else}
+        ✘
+      {/if}
+    </p>
     <p>or</p>
-    <p><label>Text <textarea name=story[text]></textarea></p>
+    <p>
+      <label>Text <textarea name=story[text]>{_newText}</textarea>
+      {#if _newText}
+        ✓
+      {else if validateUrl(_newUrl)}
+        d
+      {else}
+        ✘
+      {/if}
+    </p>
     <p><input type=submit></p>
   </form>
